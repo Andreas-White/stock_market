@@ -18,23 +18,24 @@ import java.util.StringTokenizer;
 @Service
 public class StockService {
 
-    final static String TIME_START = " 12:00:01";
-    final static String TIME_END = " 23:59:59";
-    final static SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
-    private List<StockDTO> stockDataList = new ArrayList<>();
+    private final static String TIME_START = " 06:00:01";
+    private final static String TIME_END = " 23:59:59";
+    private final static SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     public List<StockDTO> getStockDataList(String stockName, String dateStart, String dateEnd) throws ParseException {
-        
+
         String stockData = getHttpResponseBody(stockName,getUnixTimestampStart(dateStart),getUnixTimestampEnd(dateEnd));
 
         StringTokenizer tokenizer = new StringTokenizer(stockData,"\n");
         tokenizer.nextToken();
-        List<StockDTO> data = new ArrayList<>();
+        List<StockDTO> stockDataList = new ArrayList<>();
         while (tokenizer.hasMoreTokens()) {
             StringTokenizer innerToken = new StringTokenizer(tokenizer.nextToken(),",");
             StockDTO stockDTO = new StockDTO();
             while (innerToken.hasMoreTokens()) {
+                stockDTO.setName(stockName);
+                stockDTO.setUnixTimeStampStart(String.valueOf(getUnixTimestampStart(dateStart)));
+                stockDTO.setUnixTimeStampEnd(String.valueOf(getUnixTimestampStart(dateEnd)));
                 stockDTO.setDate(innerToken.nextToken());
                 stockDTO.setOpen(innerToken.nextToken());
                 stockDTO.setHigh(innerToken.nextToken());
@@ -43,9 +44,9 @@ public class StockService {
                 stockDTO.setAdjClose(innerToken.nextToken());
                 stockDTO.setVolume(innerToken.nextToken());
             }
-            data.add(stockDTO);
+            stockDataList.add(stockDTO);
         }
-        return data;
+        return stockDataList;
     }
 
     private long getUnixTimestampStart(String date) throws ParseException {
