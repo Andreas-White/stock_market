@@ -3,15 +3,13 @@ package com.antwhite.stock_market.controller;
 import com.antwhite.stock_market.data.StockDTO;
 import com.antwhite.stock_market.service.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.util.List;
 
 @RestController
+@RequestMapping(value = "/stock")
 @CrossOrigin // So the react can fetch data from this controller
 public class StockController {
 

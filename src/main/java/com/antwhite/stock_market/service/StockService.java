@@ -3,6 +3,7 @@ package com.antwhite.stock_market.service;
 import com.antwhite.stock_market.data.StockDTO;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -22,6 +23,7 @@ public class StockService {
     private final static String TIME_END = " 23:59:59";
     private final static SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
+    @Transactional
     public List<StockDTO> getStockDataList(String stockName, String dateStart, String dateEnd) throws ParseException {
 
         String stockData = getHttpResponseBody(stockName,getUnixTimestampStart(dateStart),getUnixTimestampEnd(dateEnd));
@@ -33,9 +35,6 @@ public class StockService {
             StringTokenizer innerToken = new StringTokenizer(tokenizer.nextToken(),",");
             StockDTO stockDTO = new StockDTO();
             while (innerToken.hasMoreTokens()) {
-                stockDTO.setName(stockName);
-                stockDTO.setUnixTimeStampStart(String.valueOf(getUnixTimestampStart(dateStart)));
-                stockDTO.setUnixTimeStampEnd(String.valueOf(getUnixTimestampStart(dateEnd)));
                 stockDTO.setDate(innerToken.nextToken());
                 stockDTO.setOpen(innerToken.nextToken());
                 stockDTO.setHigh(innerToken.nextToken());
