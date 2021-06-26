@@ -22,8 +22,7 @@ export const StockPage = () => {
     <div className="StockPage">
         <h2>Stock Data</h2>
         <div className="header-section">
-            {stocks.map(stock => <p>Date: {stock.date} - Open: {stock.open} - High: {stock.high} - Low: {stock.low}
-            - Close: {stock.close} - Adjusted Closing Price: {stock.adjClose} - Volume: {stock.volume}</p>)}
+            {stocks.map(stock => <StockDisplay stock={stock}/>)}
         </div>
     </div>
   );
