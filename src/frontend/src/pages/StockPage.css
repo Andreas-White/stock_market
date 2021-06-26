@@ -1,0 +1,22 @@
+.stockPage {
+    text-align: center;
+    padding-left: 5rem;
+    padding-right: 5rem;
+}
+
+.stockPage table {
+    font-family: arial, sans-serif;
+    border-collapse: separate;
+    width: 100%;
+    border: 1px solid #dddddd;
+    table-layout: fixed;
+}
+
+.stockPage th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+    background: #b3babe;
+
+}
+

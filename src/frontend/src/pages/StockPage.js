@@ -1,9 +1,9 @@
-import { React, useEffect, useState } from 'react';
-import { StockDisplay } from '../components/StockDisplay';
+import {React, useEffect, useState} from 'react';
+import {StockDisplay} from '../components/StockDisplay';
+import './StockPage.css'
 
 export const StockPage = () => {
 
-    //date,open,high,low,close,adjClose,volume
     const [stocks, setStocks] = useState([]);
 
     useEffect(
@@ -15,15 +15,31 @@ export const StockPage = () => {
                 console.log(stockData);
             };
             fetchStockData();
-        },[]
+        }, []
     );
 
-  return (
-    <div className="StockPage">
-        <h2>Stock Data</h2>
-        <div className="header-section">
-            {stocks.map(stock => <StockDisplay stock={stock}/>)}
+    return (
+        <div className="stockPage">
+            <div>
+                <h2>Stock Data</h2>
+            </div>
+            <div className="header-section">
+                <table className="tableData">
+                    <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Open</th>
+                        <th>High</th>
+                        <th>Low</th>
+                        <th>Close</th>
+                        <th>Adjusted Closing Price</th>
+                        <th>Volume</th>
+                    </tr>
+                    </thead>
+
+                </table>
+                {stocks.map(stock => <StockDisplay key={stock.date} stock={stock}/>)}
+            </div>
         </div>
-    </div>
-  );
+    );
 }
