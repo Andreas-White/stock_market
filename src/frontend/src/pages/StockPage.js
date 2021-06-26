@@ -9,7 +9,7 @@ export const StockPage = () => {
     useEffect(
         () => {
             const fetchStockData = async () => {
-                const response = await fetch("http://localhost:8080/stock/AAPL/2021-06-07/2021-06-11");
+                const response = await fetch("http://localhost:8080/stock/AAPL/2021-06-14/2021-06-18");
                 const stockData = await response.json();
                 setStocks(stockData)
                 console.log(stockData);
